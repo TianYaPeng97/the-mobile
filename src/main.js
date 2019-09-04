@@ -3,6 +3,7 @@ import App from './App.vue'
 import Vant from 'vant'
 import 'vant/lib/index.css'
 import './utils/request'
+import router from './router'
 
 Vue.config.productionTip = false
 Vue.use(Vant)
