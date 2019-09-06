@@ -1,5 +1,6 @@
 import axios from 'axios'
 import JSONbig from 'json-bigint'
+import store from 'vuex'
 
 // 创建一个axios实例,设置不同的baseURL
 const instance = axios.create({
@@ -20,7 +21,13 @@ try{
 }]
 // 请求拦截器
 instance.interceptors.request.use(function (config) {
+    //eslint-disable-next-line
     // console.log(config)
+    //判断是否有登录状态
+    if(store.state.user){
+        // 如果有自动携带token
+        config.headers.Authorization = `Bearer ${store.state.user.token}`
+    }
     return config
 },function (error) {
     return Promise.reject(error)
