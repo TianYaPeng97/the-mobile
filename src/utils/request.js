@@ -4,8 +4,8 @@ import store from '../store/index'
 
 // 创建一个axios实例,设置不同的baseURL
 const instance = axios.create({
-    timeout:2000,
-    baseURL:'http://ttapi.research.itcast.cn'
+    timeout:30000,
+    baseURL:' http://ttapi.research.itcast.cn'
 }) 
 
 // 获取服务器返回的数据，并且是在处理数据之前使用

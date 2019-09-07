@@ -1,11 +1,11 @@
 <template>
   <div>
     <!-- 导航头 -->
-    <van-nav-bar title="黑马头条" fixed></van-nav-bar>
+    <van-nav-bar title="黑马头条" fixed />
 
     <!-- 频道列表 -->
     <van-tabs animated>
-      <van-tab v-for="index in 8" :title="'标签' + index" :key="index">
+      <van-tab v-for="channel in channels" :title="channel.name" :key="channel.id">
         <!-- 文章列表数据 -->
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <van-cell v-for="item in list" :key="item" :title="item" />
@@ -16,17 +16,34 @@
 </template>
 
 <script>
+import { getDefulOrUserChannels } from '@/api/channel'
 export default {
   name: "Home",
   data() {
     return {
+      //文章列表用的数据
       list: [],
       loading: false,
-      finished: false
+      finished: false,
+      // 频道列表用的数据
+      channels:[]
     };
   },
 
   methods: {
+
+   async onloadChannels(){
+     try{
+        const data = await getDefulOrUserChannels()
+        this.channels = data.channels
+        // eslint-disable-next-line
+        console.log(data.channels)
+     }catch(err){
+      //eslint-disable-next-line
+       console.log(err)
+     }
+    
+    },
     onLoad() {
       // 异步更新数据
       setTimeout(() => {
@@ -41,7 +58,13 @@ export default {
         }
       }, 500);
     }
-  }
+  },
+  created(){
+      // 加载频道列表
+      // eslint-disable-next-line
+        // console.log(1)
+      this.onloadChannels()
+    }
 };
 </script>
 
