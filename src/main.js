@@ -7,10 +7,11 @@ import './utils/request'
 import router from './router'
 import store from './store'
 import veeValidate,{ Validator } from 'vee-validate'
-// 导入vee-validate的中文包
+// 导入vee-validate的中文包  校验 
 import zhCN from 'vee-validate/dist/locale/zh_CN'
-
-
+// 处理时间
+import { fmtDate } from './utils/dayjs'
+Vue.filter('fmtDate',fmtDate)
 
 
 Vue.config.productionTip = false
